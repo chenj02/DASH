@@ -1,0 +1,4 @@
+# ninja log v5
+2	14805	1731156324000000000	/data/chenj02/3DGS/code/hash34/submodules/simple-knn/build/temp.linux-x86_64-3.10/simple_knn.o	640bc601327462c6
+1	24068	1731156333000000000	/data/chenj02/3DGS/code/hash34/submodules/simple-knn/build/temp.linux-x86_64-3.10/ext.o	9d918d32081d4b43
+2	57974	1731156367000000000	/data/chenj02/3DGS/code/hash34/submodules/simple-knn/build/temp.linux-x86_64-3.10/spatial.o	2e1a52206030bcb2

@@ -16,7 +16,7 @@ for Real-Time Dynamic Scene Rendering</strong></h3>
 </p>
 
 <div align="center">
- <a href=''><img src='https://img.shields.io/badge/Paper-arXiv-red'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <a href='https://arxiv.org/abs/2507.19141'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <a href='https://github.com/chenj02/DASH/blob/main/LICENSE'><img src='https://img.shields.io/badge/License-MIT-green'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <br>
  <br>
@@ -32,6 +32,7 @@ for Real-Time Dynamic Scene Rendering</strong></h3>
 To train DASH, you should download the following dataset:
 + Neural 3D Video Dataset
 + Technicolor dataset
+
 We follows [4D-GS](https://github.com/hustvl/4DGaussians) for preprocessing the Neural 3D Video dataset, and [STGS](https://github.com/oppo-us-research/SpacetimeGaussians) for the Technicolor dataset. Thanks very much for their excellent work.
 
 ### Installation

@@ -613,6 +613,89 @@ def format_infos(dataset):
 
     return cameras
 
+def readPlenopticVideoDataset(datadir, eval, num_images, hold_id=[0]):
+
+    # loading all the data follow hexplane format
+    ply_path = os.path.join(datadir, "points3D_downsample2.ply")
+    pcd = fetchPly(ply_path)
+    print("Find:", ply_path, "PCD:", pcd.points.shape)
+
+    from scene.neu3d import Neural3D_NDC_Dataset
+    train_dataset = Neural3D_NDC_Dataset(
+    datadir,
+    "train",
+    1.0,
+    time_scale=1,
+    scene_bbox_min=[-2.5, -2.0, -1.0],
+    scene_bbox_max=[2.5, 2.0, 1.0],
+    eval_index=0,
+        )    
+    test_dataset = Neural3D_NDC_Dataset(
+    datadir,
+    "test",
+    1.0,
+    time_scale=1,
+    scene_bbox_min=[-2.5, -2.0, -1.0],
+    scene_bbox_max=[2.5, 2.0, 1.0],
+    eval_index=0,
+        )
+    train_cam_infos = format_infos(train_dataset)
+    test_cam_infos = format_infos(test_dataset)
+    nerf_normalization = getNerfppNorm(train_cam_infos)
+
+    scene_info = SceneInfo(point_cloud=pcd,
+                           train_cameras=train_cam_infos,
+                           test_cameras=test_cam_infos,
+                           nerf_normalization=nerf_normalization,
+                           ply_path=ply_path)
+    return scene_info
+
+def format_sports_infos(dataset):
+    # loading
+    cameras = []
+    for idx, (image, image_poses, time, fxy, cxy) in enumerate(tqdm(dataset, desc="Loading PanopticSports")):
+        image_path = dataset.image_paths[idx]
+        image_name = '%06d.png' % idx
+        # matrix = np.linalg.inv(np.array(pose))
+        R, T = image_poses
+        fx, fy = fxy
+        cx, cy = cxy
+        cameras.append(SportsCameraInfo(uid=idx, R=R, T=T, fx=fx,fy=fy,cx=cx,cy=cy, image=image,
+                            image_path=image_path, image_name=image_name, width=dataset.w, height=dataset.h,
+                            fid = time))
+
+    return cameras
+def readPanopticSportsinfos(datadir):
+    from scene.sports_dataset import PanopticDataset
+    train_dataset = PanopticDataset(datadir, "train_meta.json", split="train")
+    test_dataset = PanopticDataset(datadir, "test_meta.json", split="test")
+    nerf_normalization = {
+        "radius":train_dataset.scene_radius,
+        "translate":torch.tensor([0,0,0])
+    }
+    train_cam_infos = format_sports_infos(train_dataset)
+    test_cam_infos = format_sports_infos(test_dataset)
+    ply_path = os.path.join(datadir, "pointd3D.ply")
+
+    # Since this data set has no colmap data, we start with random points
+    plz_path = os.path.join(datadir, "init_pt_cld.npz")
+    data = np.load(plz_path)["data"]
+    xyz = data[:,:3]
+    rgb = data[:,3:6]
+    num_pts = xyz.shape[0]
+    pcd = BasicPointCloud(points=xyz, colors=rgb, normals=np.ones((num_pts, 3)))
+    storePly(ply_path, xyz, rgb)
+    # pcd = fetchPly(ply_path)
+    # breakpoint()
+    scene_info = SceneInfo(point_cloud=pcd,
+                           train_cameras=train_cam_infos,
+                           test_cameras=test_cam_infos,
+                           nerf_normalization=nerf_normalization,
+                           ply_path=ply_path
+                           )
+    return scene_info
+
+
 def readColmapCamerasTechnicolor(cam_extrinsics, cam_intrinsics, images_folder, startime=0, duration=None):
     cam_infos = []
     for idx, key in enumerate(cam_extrinsics): 

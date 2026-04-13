@@ -86,13 +86,12 @@ python metrics.py -m <output path>
 If you find our work useful, please cite:
 
 ```bibtex
-@InProceedings{Chen_2025_ICCV,
-    author    = {Chen, Jie and Hu, Zhangchi and Wu, Peixi and Zhu, Huyue and Li, Hebei and Sun, Xiaoyan},
-    title     = {DASH: 4D Hash Encoding with Self-Supervised Decomposition for Real-Time Dynamic Scene Rendering},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2025},
-    pages     = {26349-26359}
+@inproceedings{chen2025dash,
+  title={DASH: 4D Hash Encoding with Self-Supervised Decomposition for Real-Time Dynamic Scene Rendering},
+  author={Chen, Jie and Hu, Zhangchi and Wu, Peixi and Zhu, Huyue and Li, Hebei and Sun, Xiaoyan},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={26349--26359},
+  year={2025}
 }
 ```
 

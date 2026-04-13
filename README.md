@@ -1,4 +1,4 @@
-<h3 align="center"><strong>DASH: Self-Supervised Decomposition and 4D Hash Encoding
+<h3 align="center"><strong>DASH: 4D Hash Encoding with Self-Supervised Decomposition
 
 for Real-Time Dynamic Scene Rendering</strong></h3>
 <p align="center">
@@ -86,11 +86,13 @@ python metrics.py -m <output path>
 If you find our work useful, please cite:
 
 ```bibtex
-@inproceedings{chen2025dash,
-    title={DASH: Self-Supervised Decomposition and 4D Hash Encoding for Real-Time Dynamic Scene Rendering}, 
-    author={Chen, Jie and Hu, Zhangchi and Wu, Peixi and Zhu, Huyue and Li, Hebei and Sun, Xiaoyan}, 
-    booktitle = {International Conference on Computer Vision (ICCV)},
-    year={2025}
+@InProceedings{Chen_2025_ICCV,
+    author    = {Chen, Jie and Hu, Zhangchi and Wu, Peixi and Zhu, Huyue and Li, Hebei and Sun, Xiaoyan},
+    title     = {DASH: 4D Hash Encoding with Self-Supervised Decomposition for Real-Time Dynamic Scene Rendering},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2025},
+    pages     = {26349-26359}
 }
 ```
 
